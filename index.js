@@ -2,23 +2,36 @@
 
 const express = require('express')
 // const path = require('path')
-// require('doteenv').congig()
+require('dotenv').config()
 const app = express()
 const bodyParser = require('body-parser') // allow us to
+const cors = require('cors')
 
 require('./db')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cors())
 
-//
-
+//message
 
 app.post('/api/messages', require('./controllers/post_message'))
 app.get('/api/messages', require('./controllers/get_messages'))
-app.get('/api/channels', require('./controllers/get_channels'))
 
+//channels
+app.get('/api/channels', require('./controllers/get_channels'))
 app.post('/api/channels', require('./controllers/post_channel'))
+
+//users controllers , post_user, signup is just form create in html
+app.get('/api/users', require('./controllers/get_users'))
+// app.post('/api/users', require('./controllers/post_users'))
+
+
+app.post('/api/signup', require('./controllers/signup'))
+app.post('/api/login', require('./controllers/login'))
+
+
+
 
 
 // Static Files
