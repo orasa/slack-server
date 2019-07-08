@@ -2,9 +2,14 @@
 const db_message = require('../models/message')
 
 module.exports = (req, res) => {
-	
-	db_message.find({}).sort('-date').populate({
-		path: 'channel',
+	let q = {}
+	if (req.query && req.query.channel) {
+		q.channel = req.query.channel
+	}
+	db_message.find({q}).sort('-date').populate({
+
+	//path is point to model channels
+		path: 'channels',
 		select: 'name'
 	}).populate({
 		path: 'author',

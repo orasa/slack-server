@@ -19,11 +19,6 @@ const db_user = db.model('user', {
 
 },
 
-author: {
-		type: String,
-		require: true,
-	ref: 'message'
-}
 
 })
 
