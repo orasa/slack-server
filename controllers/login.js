@@ -13,10 +13,15 @@ module.exports = (req, res) => {
 				if (match) {
 
 					let token = jwt.sign(user.toObject(), process.env.SECRET)
+					console.log('TEST Token',token);
+
 					res.status(200).json({
 						message: 'You are logged in',
 						token: token
+
 					})
+					console.log('TEST LOG req.headers', req.headers);
+
 				} else {
 					res.send('Sorry, invalid password')
 				}
